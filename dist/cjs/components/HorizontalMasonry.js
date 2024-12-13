@@ -35,18 +35,18 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const utils_1 = require("../utils");
-const HorizontalMasonry = ({ children, className, gap }) => {
+const HorizontalMasonry = ({ children, className, extendClassName = "", gap = 0, }) => {
     const containerRef = (0, react_1.useRef)(null);
     const [orderedChildren, setOrderedChildren] = (0, react_1.useState)(children);
     (0, react_1.useEffect)(() => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
             const widths = Array.from(containerRef.current.children, (item) => item.getBoundingClientRect().width);
-            const indices = (0, utils_1.calculateHorizontalMasonry)(widths, rect.width, gap);
+            const indices = (0, utils_1.calculateHorizontalMasonry)(widths, rect.width, gap * 4);
             setOrderedChildren(indices.map((index) => children[index]));
         }
     }, [children, gap]);
-    return (react_1.default.createElement("div", { ref: containerRef, className: className ? className : "flex flex-wrap" }, orderedChildren));
+    return (react_1.default.createElement("div", { ref: containerRef, className: (className ? className : `flex flex-wrap gap-${gap}`) + extendClassName }, orderedChildren));
 };
 exports.default = HorizontalMasonry;
 //# sourceMappingURL=HorizontalMasonry.js.map
