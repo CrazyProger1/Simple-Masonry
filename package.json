@@ -1,11 +1,11 @@
 {
   "name": "simple-react-masonry",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
-  "source": "src/index.js",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src/styles"
