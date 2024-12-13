@@ -4,10 +4,16 @@ import { calculateHorizontalMasonry } from "../utils";
 interface Props {
   children: React.ReactNode[];
   className?: string;
+  extendClassName?: string;
   gap?: number;
 }
 
-const HorizontalMasonry = ({ children, className, gap }: Props) => {
+const HorizontalMasonry = ({
+  children,
+  className,
+  extendClassName = "",
+  gap = 0,
+}: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
 
@@ -20,7 +26,7 @@ const HorizontalMasonry = ({ children, className, gap }: Props) => {
         (item) => item.getBoundingClientRect().width,
       );
 
-      const indices = calculateHorizontalMasonry(widths, rect.width, gap);
+      const indices = calculateHorizontalMasonry(widths, rect.width, gap * 4);
 
       setOrderedChildren(indices.map((index) => children[index]));
     }
@@ -29,7 +35,9 @@ const HorizontalMasonry = ({ children, className, gap }: Props) => {
   return (
     <div
       ref={containerRef}
-      className={className ? className : "flex flex-wrap"}
+      className={
+        (className ? className : `flex flex-wrap gap-${gap}`) + extendClassName
+      }
     >
       {orderedChildren}
     </div>
