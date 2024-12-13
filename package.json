@@ -1,5 +1,5 @@
 {
-  "name": "simple-masonry",
+  "name": "simple-react-masonry",
   "version": "0.0.1",
   "type": "module",
   "source": "src/index.js",

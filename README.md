@@ -5,7 +5,7 @@
 To install execute the command:
 
 ```shell
-npm install simple-masonry
+npm install simple-react-masonry
 ```
 
 ## Usage
