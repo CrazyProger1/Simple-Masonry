@@ -24,7 +24,7 @@ const HorizontalMasonry = ({ children, className, gap }: Props) => {
 
       setOrderedChildren(indices.map((index) => children[index]));
     }
-  }, [children]);
+  }, [children, gap]);
 
   return (
     <div
