@@ -1,8 +1,8 @@
 {
   "name": "simple-react-masonry",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
-  "source": "src/index.ts",
+  "source": "./src/index.ts",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/index.d.ts",
@@ -10,8 +10,16 @@
     "dist",
     "src/styles"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "lint": "eslint './src/**/*.{ts,tsx,js,jsx}'",
+    "publish": "npm run build & npm publish"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",

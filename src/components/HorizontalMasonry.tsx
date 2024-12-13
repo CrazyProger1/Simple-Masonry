@@ -7,7 +7,7 @@ interface Props {
   gap?: number;
 }
 
-const HorizontalMasonry = ({ children, className, gap = 1 }: Props) => {
+const HorizontalMasonry = ({ children, className, gap }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
 

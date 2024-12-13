@@ -1,4 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 const findNextFittingWidth = (widths, ignoreIndices, maxWidth) => {
     for (let i = 0; i < widths.length; i++)
@@ -31,9 +39,9 @@ const calculateHorizontalMasonry = (widths, maxWidth, gap = 0) => {
 };
 
 const HorizontalMasonry = ({ children, className, gap }) => {
-    const containerRef = useRef(null);
-    const [orderedChildren, setOrderedChildren] = useState(children);
-    useEffect(() => {
+    const containerRef = React.useRef(null);
+    const [orderedChildren, setOrderedChildren] = React.useState(children);
+    React.useEffect(() => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
             const widths = Array.from(containerRef.current.children, (item) => item.getBoundingClientRect().width);
@@ -41,8 +49,8 @@ const HorizontalMasonry = ({ children, className, gap }) => {
             setOrderedChildren(indices.map((index) => children[index]));
         }
     }, [children]);
-    return (React.createElement("div", { ref: containerRef, className: className ? className : "flex flex-wrap" }, orderedChildren));
+    return (React__default["default"].createElement("div", { ref: containerRef, className: className ? className : "flex flex-wrap" }, orderedChildren));
 };
 
-export { HorizontalMasonry };
-//# sourceMappingURL=index.esm.js.map
+exports.HorizontalMasonry = HorizontalMasonry;
+//# sourceMappingURL=index.cjs.js.map
