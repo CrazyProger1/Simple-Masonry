@@ -16,7 +16,7 @@ npm install simple-masonry-ui
 import {HorizontalMasonry} from "simple-masonry-ui";
 
 // Horizontal Masonry Example
-<HorizontalMasonry gap={1}>
+<HorizontalMasonry gap={0.5}>
     <CategoryBadge text="Long Long Long Category"/>
     <CategoryBadge text="Short Category"/>
     <CategoryBadge text="Category"/>
