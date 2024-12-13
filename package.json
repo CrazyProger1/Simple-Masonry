@@ -1,6 +1,6 @@
 {
-  "name": "simple-react-masonry",
-  "version": "0.0.10",
+  "name": "simple-masonry-ui",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
