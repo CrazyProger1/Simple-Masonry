@@ -36,7 +36,7 @@ const HorizontalMasonry = ({
     <div
       ref={containerRef}
       className={
-        (className ? className : `flex flex-wrap gap-${gap}`) + extendClassName
+        (className ? className : ` flex flex-wrap gap-${gap} `) + extendClassName
       }
     >
       {orderedChildren}
