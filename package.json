@@ -1,6 +1,6 @@
 {
   "name": "simple-masonry-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -49,6 +49,7 @@
     "url": "git+https://github.com/CrazyProger1/Simple-Masonry.git"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },

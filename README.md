@@ -31,7 +31,7 @@ import {HorizontalMasonry} from "simple-masonry-ui";
 </HorizontalMasonry>
 ```
 
-![horizontal.png](./resources/horizontal.png)
+![horizontal.png](https://github.com/CrazyProger1/Simple-Masonry/blob/master/resources/horizontal.png)
 
 ## License
 

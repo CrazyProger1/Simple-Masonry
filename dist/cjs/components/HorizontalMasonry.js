@@ -32,12 +32,18 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const utils_1 = require("../utils");
-const HorizontalMasonry = ({ children, className, extendClassName = "", gap = 0, }) => {
+const clsx_1 = __importDefault(require("clsx"));
+const HorizontalMasonry = ({ children, className, gap = 0, }) => {
     const containerRef = (0, react_1.useRef)(null);
     const [orderedChildren, setOrderedChildren] = (0, react_1.useState)(children);
+    const defaultClassName = (0, clsx_1.default)("flex", "flex-wrap", gap === 1 && "gap-1", gap === 2 && "gap-2", gap === 3 && "gap-3", gap === 4 && "gap-4", gap === 5 && "gap-5");
+    className = className ? className : ` flex flex-wrap gap-${gap} `;
     (0, react_1.useEffect)(() => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
@@ -46,7 +52,7 @@ const HorizontalMasonry = ({ children, className, extendClassName = "", gap = 0,
             setOrderedChildren(indices.map((index) => children[index]));
         }
     }, [children, gap]);
-    return (react_1.default.createElement("div", { ref: containerRef, className: (className ? className : `flex flex-wrap gap-${gap}`) + extendClassName }, orderedChildren));
+    return (react_1.default.createElement("div", { ref: containerRef, className: className }, orderedChildren));
 };
 exports.default = HorizontalMasonry;
 //# sourceMappingURL=HorizontalMasonry.js.map

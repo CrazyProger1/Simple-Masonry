@@ -1,21 +1,30 @@
 import React, { useRef, useEffect, useState } from "react";
 import { calculateHorizontalMasonry } from "../utils";
+import clsx from "clsx";
 
 interface Props {
   children: React.ReactNode[];
   className?: string;
-  extendClassName?: string;
-  gap?: number;
+  gap?: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 const HorizontalMasonry = ({
   children,
   className,
-  extendClassName = "",
   gap = 0,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
+  const defaultClassName = clsx(
+      "flex",
+      "flex-wrap",
+      gap === 1 && "gap-1",
+      gap === 2 && "gap-2",
+      gap === 3 && "gap-3",
+      gap === 4 && "gap-4",
+      gap === 5 && "gap-5",
+  )
+  className = className ? className : ` flex flex-wrap gap-${gap} `;
 
   useEffect(() => {
     if (containerRef.current) {
@@ -35,9 +44,7 @@ const HorizontalMasonry = ({
   return (
     <div
       ref={containerRef}
-      className={
-        (className ? className : ` flex flex-wrap gap-${gap} `) + extendClassName
-      }
+      className={className}
     >
       {orderedChildren}
     </div>
