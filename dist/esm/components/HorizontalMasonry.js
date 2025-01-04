@@ -1,11 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import { calculateHorizontalMasonry } from "../utils";
 import clsx from "clsx";
-const HorizontalMasonry = ({ children, className, gap = 0, }) => {
+const HorizontalMasonry = ({ children, extendClassName, gap = 0 }) => {
     const containerRef = useRef(null);
     const [orderedChildren, setOrderedChildren] = useState(children);
-    const defaultClassName = clsx("flex", "flex-wrap", gap === 1 && "gap-1", gap === 2 && "gap-2", gap === 3 && "gap-3", gap === 4 && "gap-4", gap === 5 && "gap-5");
-    className = className ? className : ` flex flex-wrap gap-${gap} `;
+    const combinedClassName = clsx("flex flex-wrap", gap === 1 && "gap-1", gap === 2 && "gap-2", gap === 3 && "gap-3", gap === 4 && "gap-4", gap === 5 && "gap-5", gap === 6 && "gap-6", gap === 7 && "gap-7", gap === 8 && "gap-8", gap === 9 && "gap-9", gap === 10 && "gap-10", extendClassName);
     useEffect(() => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
@@ -14,7 +13,7 @@ const HorizontalMasonry = ({ children, className, gap = 0, }) => {
             setOrderedChildren(indices.map((index) => children[index]));
         }
     }, [children, gap]);
-    return (React.createElement("div", { ref: containerRef, className: className }, orderedChildren));
+    return (React.createElement("div", { ref: containerRef, className: combinedClassName }, orderedChildren));
 };
 export default HorizontalMasonry;
 //# sourceMappingURL=HorizontalMasonry.js.map
