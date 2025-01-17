@@ -43,18 +43,19 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0 }) => {
     const containerRef = (0, react_1.useRef)(null);
     const [orderedChildren, setOrderedChildren] = (0, react_1.useState)(children);
     const combinedClassName = (0, clsx_1.default)("flex flex-wrap", gap === 1 && "gap-1", gap === 2 && "gap-2", gap === 3 && "gap-3", gap === 4 && "gap-4", gap === 5 && "gap-5", gap === 6 && "gap-6", gap === 7 && "gap-7", gap === 8 && "gap-8", gap === 9 && "gap-9", gap === 10 && "gap-10", extendClassName);
-    const reorder = () => {
-        const current = containerRef.current;
-        if (current) {
-            const rect = current.getBoundingClientRect();
-            const widths = Array.from(current.children, (item) => item.getBoundingClientRect().width);
-            const indices = (0, utils_1.calculateHorizontalMasonry)(widths, rect.width, gap * 4);
-            setOrderedChildren(indices.map((index) => children[index]));
-        }
-    };
     (0, react_1.useEffect)(() => {
-        reorder();
-    }, [children]);
+        if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            const childrenWithWidths = Array.from(containerRef.current.children).map((item, index) => ({
+                width: item.getBoundingClientRect().width,
+                index,
+            }));
+            const sortedChildren = childrenWithWidths.sort((a, b) => b.width - a.width);
+            const sortedIndices = sortedChildren.map((child) => child.index);
+            const orderedIndices = (0, utils_1.calculateHorizontalMasonry)(sortedChildren.map((child) => child.width), rect.width, gap * 4);
+            setOrderedChildren(orderedIndices.map((index) => children[sortedIndices[index]]));
+        }
+    }, [children, gap]);
     return (react_1.default.createElement("div", { ref: containerRef, className: combinedClassName }, orderedChildren));
 };
 exports.default = HorizontalMasonry;

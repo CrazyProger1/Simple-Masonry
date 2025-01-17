@@ -11,7 +11,7 @@ interface Props {
 }
 
 const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
 
   const combinedClassName = clsx(
@@ -29,25 +29,34 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
     extendClassName,
   );
 
-  const reorder = () => {
-    const current = containerRef.current;
-    if (current) {
-      const rect = current.getBoundingClientRect();
+  useEffect(() => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
 
-      const widths = Array.from(
-        current.children,
-        (item) => item.getBoundingClientRect().width,
+      const childrenWithWidths = Array.from(containerRef.current.children).map(
+        (item, index) => ({
+          width: (item as HTMLElement).getBoundingClientRect().width,
+          index,
+        }),
       );
 
-      const indices = calculateHorizontalMasonry(widths, rect.width, gap * 4);
+      const sortedChildren = childrenWithWidths.sort(
+        (a, b) => b.width - a.width,
+      );
 
-      setOrderedChildren(indices.map((index) => children[index]));
+      const sortedIndices = sortedChildren.map((child) => child.index);
+
+      const orderedIndices = calculateHorizontalMasonry(
+        sortedChildren.map((child) => child.width),
+        rect.width,
+        gap * 4,
+      );
+
+      setOrderedChildren(
+        orderedIndices.map((index) => children[sortedIndices[index]]),
+      );
     }
-  };
-
-  useEffect(() => {
-    reorder();
-  }, [children]);
+  }, [children, gap]);
 
   return (
     <div ref={containerRef} className={combinedClassName}>
