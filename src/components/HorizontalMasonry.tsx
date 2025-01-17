@@ -3,14 +3,21 @@ import { calculateHorizontalMasonry } from "../utils";
 import clsx from "clsx";
 
 type Gap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 interface Props {
   children: React.ReactNode[];
   extendClassName?: string;
   gap?: Gap;
+  dynamic?: boolean;
 }
 
-const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const HorizontalMasonry = ({
+  children,
+  extendClassName,
+  gap = 0,
+  dynamic = true,
+}: Props) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
 
   const combinedClassName = clsx(
@@ -28,12 +35,13 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
     extendClassName,
   );
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
+  const reorder = () => {
+    const current = containerRef.current;
+    if (current) {
+      const rect = current.getBoundingClientRect();
 
       const widths = Array.from(
-        containerRef.current.children,
+        current.children,
         (item) => item.getBoundingClientRect().width,
       );
 
@@ -41,6 +49,10 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
 
       setOrderedChildren(indices.map((index) => children[index]));
     }
+  };
+
+  useEffect(() => {
+    dynamic && reorder();
   }, [children, gap]);
 
   return (
