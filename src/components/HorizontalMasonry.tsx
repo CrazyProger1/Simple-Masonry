@@ -8,15 +8,9 @@ interface Props {
   children: React.ReactNode[];
   extendClassName?: string;
   gap?: Gap;
-  dynamic?: boolean;
 }
 
-const HorizontalMasonry = ({
-  children,
-  extendClassName,
-  gap = 0,
-  dynamic = true,
-}: Props) => {
+const HorizontalMasonry = ({ children, extendClassName, gap = 0 }: Props) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [orderedChildren, setOrderedChildren] = useState(children);
 
@@ -52,9 +46,8 @@ const HorizontalMasonry = ({
   };
 
   useEffect(() => {
-    if (dynamic) reorder();
-    else setOrderedChildren(children);
-  }, [children, gap, dynamic]);
+    reorder();
+  }, [children]);
 
   return (
     <div ref={containerRef} className={combinedClassName}>

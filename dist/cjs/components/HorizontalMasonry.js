@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const utils_1 = require("../utils");
 const clsx_1 = __importDefault(require("clsx"));
-const HorizontalMasonry = ({ children, extendClassName, gap = 0, dynamic = true, }) => {
+const HorizontalMasonry = ({ children, extendClassName, gap = 0 }) => {
     const containerRef = (0, react_1.useRef)(null);
     const [orderedChildren, setOrderedChildren] = (0, react_1.useState)(children);
     const combinedClassName = (0, clsx_1.default)("flex flex-wrap", gap === 1 && "gap-1", gap === 2 && "gap-2", gap === 3 && "gap-3", gap === 4 && "gap-4", gap === 5 && "gap-5", gap === 6 && "gap-6", gap === 7 && "gap-7", gap === 8 && "gap-8", gap === 9 && "gap-9", gap === 10 && "gap-10", extendClassName);
@@ -53,11 +53,8 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0, dynamic = true,
         }
     };
     (0, react_1.useEffect)(() => {
-        if (dynamic)
-            reorder();
-        else
-            setOrderedChildren(children);
-    }, [children, gap, dynamic]);
+        reorder();
+    }, [children]);
     return (react_1.default.createElement("div", { ref: containerRef, className: combinedClassName }, orderedChildren));
 };
 exports.default = HorizontalMasonry;

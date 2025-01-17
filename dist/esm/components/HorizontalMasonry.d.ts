@@ -4,8 +4,7 @@ interface Props {
     children: React.ReactNode[];
     extendClassName?: string;
     gap?: Gap;
-    dynamic?: boolean;
 }
-declare const HorizontalMasonry: ({ children, extendClassName, gap, dynamic, }: Props) => React.JSX.Element;
+declare const HorizontalMasonry: ({ children, extendClassName, gap }: Props) => React.JSX.Element;
 export default HorizontalMasonry;
 //# sourceMappingURL=HorizontalMasonry.d.ts.map
