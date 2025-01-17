@@ -52,8 +52,9 @@ const HorizontalMasonry = ({
   };
 
   useEffect(() => {
-    dynamic && reorder();
-  }, [children, gap]);
+    if (dynamic) reorder();
+    else setOrderedChildren(children);
+  }, [children, gap, dynamic]);
 
   return (
     <div ref={containerRef} className={combinedClassName}>

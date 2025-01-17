@@ -53,8 +53,11 @@ const HorizontalMasonry = ({ children, extendClassName, gap = 0, dynamic = true,
         }
     };
     (0, react_1.useEffect)(() => {
-        dynamic && reorder();
-    }, [children, gap]);
+        if (dynamic)
+            reorder();
+        else
+            setOrderedChildren(children);
+    }, [children, gap, dynamic]);
     return (react_1.default.createElement("div", { ref: containerRef, className: combinedClassName }, orderedChildren));
 };
 exports.default = HorizontalMasonry;
